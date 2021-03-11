@@ -47,6 +47,11 @@ app.post("/api/exercise/new-user", async (req, res) => {
 });
 
 
+app.get("/api/exercise/users", async (req, res) =>{
+const userArray = await User.find({});
+res.json(userArray);
+});
+
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
