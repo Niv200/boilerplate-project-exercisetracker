@@ -26,23 +26,23 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-app.post("/api/exercise/new-user", async (req, res) =>{
+app.post("/api/exercise/new-user", async (req, res) => {
   const body = req.body;
-  const userName = body.userName;
-  const user = await User.find({userName: userName});
-  if(user[0] === undefined){
-    const newUser = new User(
-      {userName:userName}
-    );
+  const userName = body.username;
+  const user = await User.find({ userName: userName });
+  if (user[0] === undefined) {
+    const newUser = new User({
+      userName: userName,
+    });
     await newUser.save();
     const id = newUser._id;
     const obj = {
-      userName:newUser.userName,
-      _id:id
+      username: newUser.userName,
+      _id: id,
     };
     res.json(obj);
-  }else{
-    res.status(400).send("Username is taken!");
+  } else {
+    res.status(400).send("Username already taken");
   }
 });
 
