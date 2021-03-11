@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const User = require("./models/user");
+const Exercise = require("./models/exercise");
 
 mongoose
   .connect(
@@ -46,6 +47,33 @@ app.post("/api/exercise/new-user", async (req, res) => {
   }
 });
 
+app.post("/api/exercise/add", async (req, res) =>{
+  const body = req.body;
+  let exercise;
+  if(!body.date){
+     exercise = new Exercise({
+    userId: body.userId,
+    description: body.description,
+    duration: body.duration,
+  });
+  }else{
+   exercise = new Exercise({
+    userId: body.userId,
+    description: body.description,
+    duration: body.duration,
+    date: body.date
+  });
+}
+  await exercise.save();
+  const obj = {};
+  const id = exercise._id;
+  const {username} = await Exercise.findById(id);
+  obj._id = id;
+  obj.username = username;
+  obj.date = exercise.date;
+  obj.duration = exercise.duration;
+  res.json(obj);
+});
 
 app.get("/api/exercise/users", async (req, res) =>{
 const userArray = await User.find({});
