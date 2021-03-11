@@ -35,7 +35,12 @@ app.post("/api/exercise/new-user", async (req, res) =>{
       {userName:userName}
     );
     await newUser.save();
-    res.json(newUser);
+    const id = newUser._id;
+    const obj = {
+      userName:newUser.userName,
+      _id:id
+    };
+    res.json(obj);
   }else{
     res.status(400).send("Username is taken!");
   }
