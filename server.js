@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-app.post("/api/exercise/new-user", (req, res) =>{
+app.post("/api/exercise/new-user", async (req, res) =>{
   const body = req.body;
   const userName = body.userName;
   const user = await User.find({userName: userName});
