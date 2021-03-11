@@ -29,15 +29,15 @@ app.get('/', (req, res) => {
 app.post("/api/exercise/new-user", async (req, res) => {
   const body = req.body;
   const userName = body.username;
-  const user = await User.find({ userName: userName });
+  const user = await User.find({ username: userName });
   if (user[0] === undefined) {
     const newUser = new User({
-      userName: userName,
+      username: userName,
     });
     await newUser.save();
     const id = newUser._id;
     const obj = {
-      username: newUser.userName,
+      username: newUser.username,
       _id: id,
     };
     res.json(obj);
