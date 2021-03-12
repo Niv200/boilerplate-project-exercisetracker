@@ -133,7 +133,7 @@ app.get("/api/exercise/log", async (req, res) => {
     } catch (err) {
         return res.status(500).send("Internal server error");
     }
-    const { log } = user;
+    const log = user.log;
     let filtered;
     filtered = log;
  
