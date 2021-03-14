@@ -3,4 +3,4 @@
 This is exercise tracker made by Ophir and Niv. \ 
 
 [Heroku](https://enigmatic-lake-27091.herokuapp.com/) \ 
-[Repl.it](https://boilerplate-mongomongoose.niv200.repl.co)
+[Repl.it](https://boilerplate-project-exercisetracker.niv200.repl.co)
